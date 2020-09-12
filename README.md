@@ -1,4 +1,5 @@
-# la-forum-app
+# LA-forum-app
+LIFF for LA forum
 
 ## Project setup
 ```
@@ -20,5 +21,3 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
