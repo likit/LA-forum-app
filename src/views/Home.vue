@@ -1,14 +1,14 @@
 <template>
   <section class="section">
     <div class="container">
-      <div class="">
-        <h2 class="title has-text-info">Welcome</h2>
+      <div class="box">
+        <h2 class="title has-text-info">Registration</h2>
         <b-field>
-          ยินดีต้อนรับ <strong>{{ lineName }}</strong> เข้าสู่งาน LA forum 2020 กรุณากรอกข้อมูลหมายเลขใบอนุญาตเพื่อลงทะเบียนในระบบ
+          ยินดีต้อนรับ <strong>{{ user.lineName }}</strong> เข้าสู่งาน LA forum 2020 กรุณากรอกข้อมูลหมายเลขใบอนุญาตเพื่อลงทะเบียนในระบบ
           ท่านจะไม่สามารถลงชื่อเข้างานได้ด้วยระบบ QR Code หากยังไม่ได้ลงทะเบียนในระบบ App นี้
         </b-field>
         <b-field>
-          <b-input type="number" v-model="licenseId"
+          <b-input type="number" v-model="user.licenseId"
                    placeholder="หมายเลขท.น." rounded></b-input>
         </b-field>
         <b-field class="has-text-centered">
@@ -24,35 +24,53 @@
 
 <script>
 import { users } from '../firebase'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Register',
-  data() {
-    return {
-      lineName: '',
-      lineId: '',
-      licenseId: null
-    }
+  computed: {
+    ...mapState(['user'])
   },
   methods: {
     submitLicenseId: function() {
-      if (this.lineId.length > 0 && this.licenseId !== null) {
-        users.add({ lineId: this.lineId, licenseId: this.licenseId}).then((docRef)=>{
-          console.log(docRef)
+      const self = this
+      if (self.user.lineId !== null && self.user.licenseId !== null) {
+        users.where('lineId', '==', self.user.lineId).get().then((snapshot) => {
+          if (snapshot.docs.length > 0) {
+            let doc = snapshot.docs[0]
+            self.user.licenseId = doc.data().licenseId
+            users.doc(doc.id).update({ lineId: doc.data().lineId, licenseId: doc.data().licenseId })
+          } else {
+            users.add({ lineId: self.user.lineId, licenseId: self.user.licenseId}).then((docRef)=>{
+              console.log(docRef)
+            })
+          }
+          self.$router.push({ name: 'About'})
         })
       }
     }
   },
   mounted() {
     const self = this
-    this.$liff.init({ liffId: '1654917258-m2QqMz51'}).then(function() {
+    self.$liff.init({ liffId: '1654917258-m2QqMz51'}).then(function() {
         if (!self.$liff.isLoggedIn()) {
           self.$liff.login()
         }
-        self.$liff.getProfile().then((profile)=>{
-          self.lineName = profile.displayName
-          self.lineId = profile.userId
-        })
+        if (self.$liff.isLoggedIn()) {
+          console.log('about to fetch profile...')
+          self.$liff.getProfile().then((profile)=>{
+            self.user.profile = profile
+            self.user.lineId = profile.userId
+            users.where('lineId', '==', self.user.lineId).get().then((snapshot) => {
+              if (snapshot.docs.length > 0) {
+                let user = snapshot.docs[0].data()
+                console.log(user)
+                self.user.licenseId = user.licenseId
+                self.$router.push({ name: 'About'})
+              }
+            })
+          })
+        }
       }).catch((err)=>{
       console.log(err.code, err.message)
     })
