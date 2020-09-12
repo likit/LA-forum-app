@@ -17,8 +17,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 const db = firebase.firestore()
+const users = db.collection('users')
 
 export {
     firebase as fb,
     db,
+    users
 };
