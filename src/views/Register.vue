@@ -7,9 +7,8 @@
           ยินดีต้อนรับ <strong>{{ user.lineName }}</strong> เข้าสู่งาน LA forum 2020 กรุณากรอกข้อมูลหมายเลขใบอนุญาตเพื่อลงทะเบียนในระบบ
           ท่านจะไม่สามารถลงชื่อเข้างานได้ด้วยระบบ QR Code หากยังไม่ได้ลงทะเบียนในระบบ App นี้
         </b-field>
-        <b-field>
-          <b-input type="number" v-model="user.licenseId"
-                   placeholder="หมายเลขท.น." rounded></b-input>
+        <b-field message="หากแก้ไขให้กดลงทะเบียนอีกครั้ง" type="is-danger">
+          <b-input type="number" v-model="user.licenseId" placeholder="หมายเลขท.น."></b-input>
         </b-field>
         <b-field class="has-text-centered">
           <button class="is-info button is-rounded" @click="submitLicenseId">
@@ -19,7 +18,8 @@
         </b-field>
         <b-field class="has-text-centered" v-if="showHomeButton">
           <button class="button is-light is-rounded" @click="goHome">
-            ไปหน้าหลัก
+            <b-icon pack="fas" icon="chevron-left"></b-icon>
+            <span>หน้าหลัก</span>
           </button>
         </b-field>
       </div>
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     goHome: function() {
-      this.$router.push({ name: 'About' })
+      this.$router.push({ name: 'Home' })
     },
     submitLicenseId: function() {
       const self = this
@@ -79,8 +79,10 @@ export default {
               self.showHomeButton = true
             }
           })
+        } else {
+          self.showHomeButton = true
         }
-      }).catch((err)=>{
+    }).catch((err)=>{
       console.log(err.code, err.message)
     })
   }

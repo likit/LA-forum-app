@@ -4,7 +4,7 @@
       <h2 class="title has-text-info">Welcome {{ user.profile.displayName }}</h2>
       <h2 class="subtitle">License ID: {{ user.licenseId }}</h2>
 
-      <div class="media box">
+      <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
         <figure class="media-left">
           <p class="image is-128x128">
             <img src="https://source.unsplash.com/random/128x128">
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="media box">
+      <div class="media box" @click="$router.push({ name: 'Register' })">
         <figure class="media-left">
           <p class="image is-128x128">
             <img src="https://source.unsplash.com/random/128x128">
