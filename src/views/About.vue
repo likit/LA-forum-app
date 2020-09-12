@@ -12,7 +12,7 @@
         </figure>
         <div class="media-content">
           <div class="content">
-            <h3 class="title is-size-3">Registration</h3>
+            <h3 class="title is-size-5">Registration</h3>
             ขั้นตอนการลงทะเบียนเข้างาน
           </div>
         </div>
@@ -26,7 +26,7 @@
         </figure>
         <div class="media-content">
           <div class="content">
-            <h3 class="title is-size-3">Account</h3>
+            <h3 class="title is-size-5">Account</h3>
             แก้ไขหมายเลขใบประกอบวิชาชีพ
           </div>
         </div>
@@ -40,7 +40,7 @@
         </figure>
         <div class="media-content">
           <div class="content">
-            <h3 class="title is-size-3">Programs</h3>
+            <h3 class="title is-size-5">Programs</h3>
               รายการบรรยายและกิจกรรม
           </div>
         </div>
@@ -55,7 +55,7 @@
       </figure>
       <div class="media-content">
         <div class="content">
-          <h3 class="title is-size-3">Survey</h3>
+          <h3 class="title is-size-5">Survey</h3>
           แบบสำรวจความพึงพอใจ
         </div>
       </div>
@@ -73,7 +73,11 @@ export default {
   mounted() {
     const self = this
     this.$liff.init({liffId: '1654917258-m2QqMz51'}).then(function () {
-      if (!self.$liff.isLoggedIn() || self.user.licenseId === null) {
+      if (!self.$liff.isLoggedIn()) {
+        self.$liff.login()
+      }
+      self.$store.dispatch('fetchProfile')
+      if (self.user.licenseId === null) {
         self.$router.push({ name: 'Register' })
       }
     })
