@@ -19,6 +19,11 @@ const routes = [
     path: '/info/registration',
     name: 'RegistrationInfo',
     component: () => import(/* webpackChunkName: "about" */ '../views/RegistrationInfo')
+  },
+  {
+    path: '/registration/qrcode',
+    name: 'QRCode',
+    component: () => import(/* webpackChunkName: "about" */ '../views/QRCode')
   }
 ]
 

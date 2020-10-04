@@ -6,7 +6,9 @@ import 'buefy/dist/buefy.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import liff from '@line/liff'
 import store from "./store";
+import VueQrcode from '@chenfengyuan/vue-qrcode';
 
+Vue.component(VueQrcode.name, VueQrcode);
 Vue.config.productionTip = false
 Vue.prototype.$liff = liff
 Vue.use(Buefy)

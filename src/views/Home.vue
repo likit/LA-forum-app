@@ -18,6 +18,20 @@
         </div>
       </div>
 
+      <div class="media box" @click="$router.push({ name: 'QRCode' })">
+        <figure class="media-left">
+          <p class="image is-128x128">
+            <img src="https://source.unsplash.com/random/128x128">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <h3 class="title is-size-5">QR Code</h3>
+            QR Code สำหรับลงทะเบียนเข้างาน
+          </div>
+        </div>
+      </div>
+
       <div class="media box" @click="$router.push({ name: 'Register' })">
         <figure class="media-left">
           <p class="image is-128x128">
