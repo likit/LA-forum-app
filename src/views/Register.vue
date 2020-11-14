@@ -4,22 +4,25 @@
       <div class="box">
         <h2 class="title has-text-info">Registration</h2>
         <b-field>
-          ยินดีต้อนรับ <strong>{{ user.lineName }}</strong> เข้าสู่งาน LA forum 2020 กรุณากรอกข้อมูลหมายเลขใบอนุญาตเพื่อลงทะเบียนในระบบ
+          ยินดีต้อนรับ <strong>{{ user.lineName }}</strong> เข้าสู่งาน LA forum 2020 กรุณากรอกข้อมูลหมายเลขลงทะเบียนและรหัสผ่านเพื่อเปิดการใช้งานระบบ
           ท่านจะไม่สามารถลงชื่อเข้างานได้ด้วยระบบ QR Code หากยังไม่ได้ลงทะเบียนในระบบ App นี้
         </b-field>
-        <b-field message="หากแก้ไขให้กดลงทะเบียนอีกครั้ง" type="is-danger">
-          <b-input type="number" v-model="user.licenseId" placeholder="หมายเลขท.น."></b-input>
+        <b-field message="กรุณาตรวจสอบหมายเลขลงทะเบียนในอีเมลที่ท่านได้รับ" type="is-danger">
+          <b-input type="number" v-model="number" placeholder="หมายเลขลงทะเบียน"></b-input>
         </b-field>
-        <b-field class="has-text-centered">
-          <button class="is-info button is-rounded" @click="submitLicenseId">
-            <b-icon pack="far" icon="user"></b-icon>
-            <span>ลงทะเบียน</span>
-          </button>
+        <b-field message="กรุณาตรวจสอบรหัสผ่านในอีเมลที่ท่านได้รับ" type="is-danger">
+          <b-input type="number" v-model="passcode" placeholder="รหัสผ่าน"></b-input>
         </b-field>
         <b-field class="has-text-centered" v-if="showHomeButton">
           <button class="button is-light is-rounded" @click="goHome">
             <b-icon pack="fas" icon="chevron-left"></b-icon>
             <span>หน้าหลัก</span>
+          </button>
+        </b-field>
+        <b-field class="has-text-centered" v-else>
+          <button class="is-info button is-rounded" @click="submit">
+            <b-icon pack="far" icon="user"></b-icon>
+            <span>ลงทะเบียน</span>
           </button>
         </b-field>
       </div>
@@ -35,7 +38,9 @@ export default {
   name: 'Register',
   data() {
     return {
-      showHomeButton: false
+      showHomeButton: false,
+      number: null,
+      passcode: null
     }
   },
   computed: {
@@ -45,25 +50,32 @@ export default {
     goHome: function() {
       this.$router.push({ name: 'Home' })
     },
-    submitLicenseId: function() {
+    submit: function() {
       const self = this
-      if (self.user.licenseId !== null) {
-        users.where('lineId', '==', self.user.lineId).get().then((snapshot) => {
-          if (snapshot.docs.length > 0) {
-            let doc = snapshot.docs[0]
-            self.user.licenseId = doc.data().licenseId
-            users.doc(doc.id).update({ lineId: doc.data().lineId, licenseId: doc.data().licenseId }).then(()=>{
+      users.where('number', '==', 1).get().then((snapshot) => {
+        if (snapshot.docs.length > 0) {
+          let doc = snapshot.docs[0]
+          if (doc.data().passcode == self.passcode) {
+            self.user.number = doc.data().number
+            self.user.firstname = doc.data().firstname
+            self.user.lastname = doc.data().lastname
+            self.user.email = doc.data().email
+            self.user.phone = doc.data().phone
+            if (doc.data().lineId === null) {
+              users.doc(doc.id).update({ lineId: self.user.lineId })
+            }
+            users.doc(doc.id).update({ activated: true }).then(()=>{
               self.showHomeButton = true
-              self.$buefy.toast.open({ message: 'บันทึกข้อมูลเรียบร้อย', type: 'is-success'})
+              self.user.activated = true
+              self.$buefy.toast.open({ message: 'เปิดการใช้งานเรียบร้อย', type: 'is-success'})
             })
           } else {
-            users.add({ lineId: self.user.lineId, licenseId: self.user.licenseId}).then(()=>{
-              self.showHomeButton = true
-              self.$buefy.toast.open({ message: 'บันทึกข้อมูลเรียบร้อย', type: 'is-success'})
-            })
+            self.$buefy.toast.open({ message: 'รหัสผ่านไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง', type: 'is-danger'})
           }
-        })
-      }
+        } else {
+          self.$buefy.toast.open({ message: 'ไม่พบข้อมูลการลงทะเบียนของท่าน โปรดติดต่อเจ้าหน้าที่สภาฯ', type: 'is-danger'})
+        }
+      })
     }
   },
   mounted() {
@@ -71,17 +83,7 @@ export default {
     // user must be logged in to access this view
     // user's profile must be retrieved before accessing this view
     self.$liff.init({ liffId: '1654917258-m2QqMz51'}).then(function() {
-        if (self.user.licenseId === null) {
-          users.where('lineId', '==', self.user.lineId).get().then((snapshot) => {
-            if (snapshot.docs.length > 0) {
-              let user = snapshot.docs[0].data()
-              self.user.licenseId = user.licenseId
-              self.showHomeButton = true
-            }
-          })
-        } else {
-          self.showHomeButton = true
-        }
+      console.log('please log in..')
     }).catch((err)=>{
       console.log(err.code, err.message)
     })

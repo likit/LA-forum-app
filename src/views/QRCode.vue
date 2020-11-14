@@ -1,10 +1,21 @@
 <template>
-  <div class="container box">
-    <h1 class="title is-size-3 has-text-centered">QR Code สำหรับลงทะเบียนเข้างาน</h1>
-    <qrcode v-bind:value="$store.state.user.lineId"
-            v-if="$store.state.user.lineId !== null"
-            :options="{ width: 200 }"></qrcode>
-  </div>
+  <section class="section">
+    <div class="container box">
+      <h1 class="title is-size-4 has-text-info has-text-centered">QR Code</h1>
+      <h1 class="subtitle is-size-6 has-text-centered">สำหรับลงทะเบียนเข้างานและรับกระเป๋า</h1>
+      <qrcode v-bind:value="$store.state.user.lineId"
+              v-if="$store.state.user.lineId !== null"
+              :options="{ width: 250 }"></qrcode>
+    </div>
+    <div class="buttons is-centered">
+      <router-link :to="{ name: 'Home' }">
+        <button class="button is-light">
+          <b-icon pack="fas" icon="chevron-left"></b-icon>
+          <span>Back</span>
+        </button>
+      </router-link>
+    </div>
+  </section>
 </template>
 
 <script>

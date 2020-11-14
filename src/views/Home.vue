@@ -1,13 +1,15 @@
 <template>
   <section class="section">
     <div class="container">
-      <h2 class="title has-text-info">Welcome {{ user.profile.displayName }}</h2>
-      <h2 class="subtitle">License ID: {{ user.licenseId }}</h2>
-
+      <div class="has-text-centered">
+        <h2 class="title is-size-4 has-text-info">Welcome</h2>
+        <h2 class="subtitle is-size-6">{{ user.title }}{{ user.firstname }} {{ user.lastname }}</h2>
+      </div>
+      <br>
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
         <figure class="media-left">
-          <p class="image is-128x128">
-            <img src="https://source.unsplash.com/random/128x128">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/random/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -20,8 +22,8 @@
 
       <div class="media box" @click="$router.push({ name: 'QRCode' })">
         <figure class="media-left">
-          <p class="image is-128x128">
-            <img src="https://source.unsplash.com/random/128x128">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/random/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -32,24 +34,24 @@
         </div>
       </div>
 
-      <div class="media box" @click="$router.push({ name: 'Register' })">
+      <div class="media box" @click="$router.push({ name: 'Account' })">
         <figure class="media-left">
-          <p class="image is-128x128">
-            <img src="https://source.unsplash.com/random/128x128">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/random/64x64">
           </p>
         </figure>
         <div class="media-content">
           <div class="content">
             <h3 class="title is-size-5">Account</h3>
-            แก้ไขหมายเลขใบประกอบวิชาชีพ
+            ข้อมูลส่วนตัว
           </div>
         </div>
       </div>
 
       <div class="media box">
         <figure class="media-left">
-          <p class="image is-128x128">
-            <img src="https://source.unsplash.com/random/128x128">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/random/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -59,18 +61,17 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="media box">
-      <figure class="media-left">
-        <p class="image is-128x128">
-          <img src="https://source.unsplash.com/random/128x128">
-        </p>
-      </figure>
-      <div class="media-content">
-        <div class="content">
-          <h3 class="title is-size-5">Survey</h3>
-          แบบสำรวจความพึงพอใจ
+      <div class="media box">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/random/64x64">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <h3 class="title is-size-5">Survey</h3>
+            แบบสำรวจความพึงพอใจ
+          </div>
         </div>
       </div>
     </div>
@@ -91,7 +92,8 @@ export default {
         self.$liff.login()
       }
       self.$store.dispatch('fetchProfile')
-      if (self.user.licenseId === null) {
+      self.$store.dispatch('fetchUser')
+      if (self.user.activated === false || self.user.lineId === null) {
         self.$router.push({ name: 'Register' })
       }
     })
