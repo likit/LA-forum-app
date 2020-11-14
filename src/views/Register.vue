@@ -61,7 +61,7 @@ export default {
             self.user.lastname = doc.data().lastname
             self.user.email = doc.data().email
             self.user.phone = doc.data().phone
-            if (doc.data().lineId === null) {
+            if (self.user.lineId !== null) {
               users.doc(doc.id).update({ lineId: self.user.lineId })
             }
             users.doc(doc.id).update({ activated: true }).then(()=>{
@@ -77,16 +77,6 @@ export default {
         }
       })
     }
-  },
-  mounted() {
-    const self = this
-    // user must be logged in to access this view
-    // user's profile must be retrieved before accessing this view
-    self.$liff.init({ liffId: '1654917258-m2QqMz51'}).then(function() {
-      console.log('please log in..')
-    }).catch((err)=>{
-      console.log(err.code, err.message)
-    })
   }
 }
 </script>

@@ -4,6 +4,7 @@
       <div class="has-text-centered">
         <h2 class="title is-size-4 has-text-info">Welcome</h2>
         <h2 class="subtitle is-size-6">{{ user.title }}{{ user.firstname }} {{ user.lastname }}</h2>
+        <p>{{ user.profile.displayName }}</p>
       </div>
       <br>
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
@@ -69,6 +70,19 @@
         </figure>
         <div class="media-content">
           <div class="content">
+            <h3 class="title is-size-5">Opening Ceremony</h3>
+            พิธีเปิด
+          </div>
+        </div>
+      </div>
+      <div class="media box">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/random/64x64">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
             <h3 class="title is-size-5">Survey</h3>
             แบบสำรวจความพึงพอใจ
           </div>
@@ -87,16 +101,16 @@ export default {
   },
   mounted() {
     const self = this
-    this.$liff.init({liffId: '1654917258-m2QqMz51'}).then(function () {
-      if (!self.$liff.isLoggedIn()) {
-        self.$liff.login()
-      }
-      self.$store.dispatch('fetchProfile')
-      self.$store.dispatch('fetchUser')
-      if (self.user.activated === false || self.user.lineId === null) {
-        self.$router.push({ name: 'Register' })
+    this.$liff.init({ liffId: '1654917258-m2QqMz51'}).then(function() {
+      if (self.$liff.isLoggedIn()) {
+        self.$store.dispatch('fetchProfile')
+        self.$store.dispatch('fetchUser')
+        // self.$liff.login()
       }
     })
+    if (this.user.activated === false || this.user.lineId === null) {
+      this.$router.push({ name: 'Register' })
+    }
   },
   methods: {
   }

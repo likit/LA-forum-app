@@ -57,16 +57,18 @@ export default new Vuex.Store({
         fetchUser({ commit, state }) {
             if (state.user.lineId) {
                 users.where('lineId', '==', state.user.lineId).get().then((snapshot) => {
-                    let user = snapshot.docs[0]
-                    commit('set_license_id', user.data().licenseId)
-                    commit('set_line_id', user.data().lineId)
-                    commit('set_firstname', user.data().firstname)
-                    commit('set_lastname', user.data().lastname)
-                    commit('set_title', user.data().title)
-                    commit('set_email', user.data().email)
-                    commit('set_phone', user.data().phone)
-                    commit('set_activated', user.data().activated)
-                    commit('set_number', user.data().number)
+                    if (snapshot.docs.length > 0) {
+                        let user = snapshot.docs[0]
+                        commit('set_license_id', user.data().licenseId)
+                        commit('set_line_id', user.data().lineId)
+                        commit('set_firstname', user.data().firstname)
+                        commit('set_lastname', user.data().lastname)
+                        commit('set_title', user.data().title)
+                        commit('set_email', user.data().email)
+                        commit('set_phone', user.data().phone)
+                        commit('set_activated', user.data().activated)
+                        commit('set_number', user.data().number)
+                    }
                 })
             }
         },
