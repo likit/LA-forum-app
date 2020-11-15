@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="media box">
+      <div class="media box" @click="$router.push({ name: 'Opening' })">
         <figure class="media-left">
           <p class="image is-64x64">
             <img src="https://source.unsplash.com/random/64x64">
@@ -106,6 +106,9 @@ export default {
         self.$store.dispatch('fetchProfile')
         self.$store.dispatch('fetchUser')
         // self.$liff.login()
+      } else {
+        // self.$liff.login()
+        // self.$store.dispatch('fetchProfile')
       }
     })
     if (this.user.activated === false || this.user.lineId === null) {

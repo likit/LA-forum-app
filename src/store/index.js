@@ -19,9 +19,13 @@ export default new Vuex.Store({
             email: null,
             phone: null,
             activated: false,
-        }
+        },
+        opening: false,
     },
     mutations: {
+        toggle_opening(state) {
+            state.opening = true
+        },
         set_license_id(state, licenseId) {
             state.user.licenseId = licenseId
         },

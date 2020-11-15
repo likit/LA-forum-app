@@ -4,7 +4,7 @@
       <div class="box">
         <h2 class="title has-text-info">Registration</h2>
         <b-field>
-          ยินดีต้อนรับ <strong>{{ user.lineName }}</strong> เข้าสู่งาน LA forum 2020 กรุณากรอกข้อมูลหมายเลขลงทะเบียนและรหัสผ่านเพื่อเปิดการใช้งานระบบ
+          ยินดีต้อนรับเข้าสู่งาน LA forum 2020 กรุณากรอกข้อมูลหมายเลขลงทะเบียนและรหัสผ่านเพื่อเปิดการใช้งานระบบ
           ท่านจะไม่สามารถลงชื่อเข้างานได้ด้วยระบบ QR Code หากยังไม่ได้ลงทะเบียนในระบบ App นี้
         </b-field>
         <b-field message="กรุณาตรวจสอบหมายเลขลงทะเบียนในอีเมลที่ท่านได้รับ" type="is-danger">
@@ -44,7 +44,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['opening', 'user'])
   },
   methods: {
     goHome: function() {
@@ -56,17 +56,23 @@ export default {
         if (snapshot.docs.length > 0) {
           let doc = snapshot.docs[0]
           if (doc.data().passcode == self.passcode) {
-            self.user.number = doc.data().number
-            self.user.firstname = doc.data().firstname
-            self.user.lastname = doc.data().lastname
-            self.user.email = doc.data().email
-            self.user.phone = doc.data().phone
+            self.$store.commit('set_number', doc.data().number)
+            self.$store.commit('set_title', doc.data().title)
+            self.$store.commit('set_firstname', doc.data().firstname)
+            self.$store.commit('set_lastname', doc.data().lastname)
+            self.$store.commit('set_email', doc.data().email)
+            self.$store.commit('set_phone', doc.data().phone)
+            self.$store.commit('set_license_id', doc.data().licenseId)
             if (self.user.lineId !== null) {
               users.doc(doc.id).update({ lineId: self.user.lineId })
             }
+            // the account has been activated before
+            if (self.user.lineId === null && doc.data().lineId !== null) {
+              self.$store.commit('set_line_id', doc.data().lineId)
+            }
             users.doc(doc.id).update({ activated: true }).then(()=>{
               self.showHomeButton = true
-              self.user.activated = true
+              self.$store.commit('set_user_activated', true)
               self.$buefy.toast.open({ message: 'เปิดการใช้งานเรียบร้อย', type: 'is-success'})
             })
           } else {
