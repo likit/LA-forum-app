@@ -52,6 +52,11 @@ name: "Account",
   computed: {
     ...mapState(['user'])
   },
+  mounted() {
+    if (this.$store.state.user.number === null) {
+      this.$router.push({ name: 'Register' })
+    }
+  },
 }
 </script>
 

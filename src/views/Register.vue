@@ -52,7 +52,7 @@ export default {
     },
     submit: function() {
       const self = this
-      users.where('number', '==', 1).get().then((snapshot) => {
+      users.where('number', '==', parseInt(this.number)).get().then((snapshot) => {
         if (snapshot.docs.length > 0) {
           let doc = snapshot.docs[0]
           if (doc.data().passcode == self.passcode) {

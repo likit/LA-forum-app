@@ -10,7 +10,7 @@
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://source.unsplash.com/random/64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -24,7 +24,7 @@
       <div class="media box" @click="$router.push({ name: 'QRCode' })">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://source.unsplash.com/random/64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -38,7 +38,7 @@
       <div class="media box" @click="$router.push({ name: 'Account' })">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://source.unsplash.com/random/64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -52,7 +52,7 @@
       <div class="media box" @click="$router.push({ name: 'Program' })">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://source.unsplash.com/random/64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -65,7 +65,7 @@
       <div class="media box" @click="$router.push({ name: 'Opening' })">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://source.unsplash.com/random/64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -78,7 +78,7 @@
       <div class="media box">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://source.unsplash.com/random/64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
           </p>
         </figure>
         <div class="media-content">
@@ -89,16 +89,16 @@
         </div>
       </div>
 
-      <div class="media box">
+      <div class="media box" style="background-color: orange">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://source.unsplash.com/random/64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
           </p>
         </figure>
         <div class="media-content">
           <div class="content">
             <h3 class="title is-size-5">Admin</h3>
-            Admin only
+            Danger zone
           </div>
         </div>
       </div>

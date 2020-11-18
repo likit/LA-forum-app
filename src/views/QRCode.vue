@@ -24,6 +24,9 @@
 export default {
 name: "QRCode",
   mounted() {
+    if (this.$store.state.user.number === null) {
+      this.$router.push({ name: 'Register' })
+    }
   }
 }
 </script>

@@ -82,8 +82,7 @@ export default {
           self.$router.push({'name': 'Program'})
         })
       } else {
-        programs.add(this.program).then((doc)=>{
-          console.log(doc.id)
+        programs.add(this.program).then(()=>{
           self.$buefy.toast.open({ message: 'บันทึกโปรแกรมเรียบร้อย', type: 'is-success'})
           self.$router.push({ name: 'Program'})
         })
