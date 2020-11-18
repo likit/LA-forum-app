@@ -74,6 +74,7 @@ export default {
               self.showHomeButton = true
               self.$store.commit('set_user_activated', true)
               self.$buefy.toast.open({ message: 'เปิดการใช้งานเรียบร้อย', type: 'is-success'})
+              self.$router.push({'name': 'Home'})
             })
           } else {
             self.$buefy.toast.open({ message: 'รหัสผ่านไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง', type: 'is-danger'})
