@@ -9,9 +9,11 @@
     </div>
     <div class="buttons is-centered">
       <router-link :to="{ name: 'Home' }">
-        <button class="button is-light">
-          <b-icon pack="fas" icon="chevron-left"></b-icon>
-          <span>Back</span>
+        <button class="button is-info is-rounded">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+          <span>Home</span>
         </button>
       </router-link>
     </div>

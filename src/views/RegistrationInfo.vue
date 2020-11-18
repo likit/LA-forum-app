@@ -13,13 +13,15 @@
   </div>
   <div class="buttons is-centered">
     <router-link :to="{ name: 'Home' }">
-      <button class="button is-light">
-        <b-icon pack="fas" icon="chevron-left"></b-icon>
-        <span>Back</span>
+      <button class="button is-info is-rounded">
+        <span class="icon">
+          <i class="fas fa-home"></i>
+        </span>
+        <span>Home</span>
       </button>
     </router-link>
     <router-link :to="{ name: 'QRCode' }">
-      <button class="button is-link">
+      <button class="button is-rounded is-link">
         <b-icon pack="fas" icon="qrcode"></b-icon>
         <span>Scan QR</span>
       </button>

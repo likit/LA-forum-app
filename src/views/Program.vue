@@ -1,14 +1,15 @@
 <template>
 <section class="section">
   <h1 class="title is-info has-text-centered">Programs</h1>
-  <table class="table is-fullwidth is-bordered is-narrow is-striped" v-for="pg in progs" :key="pg.title">
+  <table class="table is-fullwidth box is-striped" v-for="pg in progs" :key="pg.title">
+    <col width="50%">
     <tr>
       <td><strong>เริ่ม</strong></td>
-      <td>{{ pg.start.fromNow() }}</td>
+      <td>{{ pg.start.calendar() }}</td>
     </tr>
     <tr>
       <td><strong>ถึง</strong></td>
-      <td>{{ pg.end.fromNow() }}</td>
+      <td>{{ pg.end.calendar() }}</td>
     </tr>
     <tr>
       <td><strong>รายการ</strong></td>
@@ -31,14 +32,17 @@
       <td><a :href="pg.materialUrl">{{ pg.materialUrl }}</a></td>
     </tr>
     <tr v-if="$store.state.user.admin">
-      <td colspan="2"><button class="button is-light" @click="$router.push({ name: 'ProgramAdminEdit', params: { programId: pg.id }})">edit</button></td>
+      <td colspan="2"><button class="button is-rounded is-light is-danger" @click="$router.push({ name: 'ProgramAdminEdit', params: { programId: pg.id }})">Edit</button></td>
     </tr>
   </table>
   <div class="buttons is-centered">
-    <button class="button is-light" v-if="$store.state.user.admin"
+    <button class="button is-light is-success is-rounded" v-if="$store.state.user.admin"
             @click="$router.push({ name: 'ProgramAdmin' })">Add</button>
-    <button class="button is-light" @click="$router.push({ name: 'Home' })">
-      Home
+    <button class="button is-info is-rounded" @click="$router.push({ name: 'Home' })">
+      <span class="icon">
+        <i class="fas fa-home"></i>
+      </span>
+      <span>Home</span>
     </button>
   </div>
 </section>

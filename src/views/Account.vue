@@ -33,9 +33,11 @@
     </div>
     <div class="columns">
       <div class="column has-text-centered">
-        <a class="button is-light" @click="$router.push({name: 'Home'})">
-          <span class="icon"><i class="fas fa-chevron-left"></i></span>
-          <span>Back</span>
+        <a class="button is-info is-rounded" @click="$router.push({name: 'Home'})">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+          <span>Home</span>
         </a>
       </div>
     </div>

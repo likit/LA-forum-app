@@ -30,7 +30,15 @@
     <b-field label="URL to Materials">
       <b-input v-model="program.materialUrl"></b-input>
     </b-field>
-    <button class="is-success" @click="save">Save</button>
+    <div class="buttons is-centered">
+      <a class="button is-info is-rounded" @click="$router.push({name: 'Home'})">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        <span>Home</span>
+      </a>
+      <button class="is-success button is-rounded" @click="save">Save</button>
+    </div>
   </div>
 </section>
 </template>
