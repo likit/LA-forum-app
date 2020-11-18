@@ -63,6 +63,7 @@ export default {
             self.$store.commit('set_email', doc.data().email)
             self.$store.commit('set_phone', doc.data().phone)
             self.$store.commit('set_license_id', doc.data().licenseId)
+            self.$store.commit('set_admin', doc.data().admin)
             if (self.user.lineId !== null) {
               users.doc(doc.id).update({ lineId: self.user.lineId })
             }

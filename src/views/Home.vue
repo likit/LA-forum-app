@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <div class="media box">
+      <div class="media box" @click="$router.push({ name: 'Program' })">
         <figure class="media-left">
           <p class="image is-64x64">
             <img src="https://source.unsplash.com/random/64x64">
@@ -88,6 +88,21 @@
           </div>
         </div>
       </div>
+
+      <div class="media box">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/random/64x64">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <h3 class="title is-size-5">Admin</h3>
+            Admin only
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 </template>

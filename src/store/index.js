@@ -9,6 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         user: {
+            admin: false,
             lineId: null,
             licenseId: null,
             number: null,
@@ -28,6 +29,9 @@ export default new Vuex.Store({
         },
         set_license_id(state, licenseId) {
             state.user.licenseId = licenseId
+        },
+        set_admin(state, isAdmin) {
+            state.user.admin = isAdmin
         },
         set_line_id(state, lineId) {
             state.user.lineId = lineId
@@ -72,6 +76,7 @@ export default new Vuex.Store({
                         commit('set_phone', user.data().phone)
                         commit('set_activated', user.data().activated)
                         commit('set_number', user.data().number)
+                        commit('set_admin', user.data().admin)
                     }
                 })
             }

@@ -34,7 +34,22 @@ const routes = [
     path: '/opening',
     name: 'Opening',
     component: () => import(/* webpackChunkName: "about" */ '../views/Opening')
-  }
+  },
+  {
+    path: '/programs',
+    name: 'Program',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Program')
+  },
+  {
+    path: '/admin/programs',
+    name: 'ProgramAdmin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ProgramAdmin')
+  },
+  {
+    path: '/admin/programs/<:programId>/edit',
+    name: 'ProgramAdminEdit',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ProgramAdmin')
+  },
 ]
 
 const router = new VueRouter({
