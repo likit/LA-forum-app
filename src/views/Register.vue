@@ -1,8 +1,12 @@
 <template>
   <section class="section">
+    <div class="has-text-centered">
+      <img src="../assets/LA-logo-small.png" width="100">
+      <h2 class="title has-text-info">Activation</h2>
+      <h2 class="subtitle is-size-4">เปิดใช้งานแอพพลิเคชั่น</h2>
+    </div>
     <div class="container">
       <div class="box">
-        <h2 class="title has-text-info">Registration</h2>
         <b-field>
           ยินดีต้อนรับเข้าสู่งาน LA forum 2020 กรุณากรอกข้อมูลหมายเลขลงทะเบียนและรหัสผ่านเพื่อเปิดการใช้งานระบบ
           ท่านจะไม่สามารถลงชื่อเข้างานได้ด้วยระบบ QR Code หากยังไม่ได้ลงทะเบียนในระบบ App นี้
