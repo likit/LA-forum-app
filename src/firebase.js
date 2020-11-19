@@ -20,6 +20,7 @@ const db = firebase.firestore()
 const users = db.collection('users')
 const programs = db.collection('programs')
 const draws = db.collection('draws')
+const galleries = db.collection('galleries')
 
 export {
     firebase as fb,
@@ -27,4 +28,5 @@ export {
     users,
     programs,
     draws,
+    galleries
 };

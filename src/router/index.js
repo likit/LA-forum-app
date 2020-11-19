@@ -41,6 +41,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Program')
   },
   {
+    path: '/gallery',
+    name: 'Gallery',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Gallery')
+  },
+  {
     path: '/admin/programs',
     name: 'ProgramAdmin',
     component: () => import(/* webpackChunkName: "about" */ '../views/ProgramAdmin')
@@ -59,6 +64,11 @@ const routes = [
     path: '/admin/opening-draw',
     name: 'OpeningDraw',
     component: () => import(/* webpackChunkName: "about" */ '../views/OpeningDraw')
+  },
+  {
+    path: '/admin/gallery',
+    name: 'GalleryAdmin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/GalleryAdmin')
   },
 ]
 

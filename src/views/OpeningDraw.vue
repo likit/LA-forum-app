@@ -13,6 +13,15 @@
         <h1 class="title is-size-1">{{ w.number }}</h1>
       </div>
     </div>
+    <br>
+    <div class="buttons is-centered">
+      <button class="button is-info is-rounded" @click="$router.push({ name: 'Admin' })">
+      <span class="icon">
+        <i class="fas fa-home"></i>
+      </span>
+        <span>Admin</span>
+      </button>
+    </div>
   </section>
 </template>
 
@@ -27,6 +36,11 @@ export default {
       wins: [],
       winners: [],
       winlist: []
+    }
+  },
+  mounted() {
+    if (this.$store.state.user.admin === false || this.$store.state.user.number === null){
+      this.$router.push({ name: 'Register'})
     }
   },
   methods: {

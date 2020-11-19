@@ -91,6 +91,20 @@
         </div>
       </div>
 
+      <div class="media box" @click="$router.push({ name: 'Gallery' })">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <h3 class="title is-size-5">Photo Gallery</h3>
+            อัลบั้มภาพกิจกรรม
+          </div>
+        </div>
+      </div>
+
       <div class="media box" style="background-color: orange" @click="$router.push({ name: 'Admin'})">
         <figure class="media-left">
           <p class="image is-64x64">

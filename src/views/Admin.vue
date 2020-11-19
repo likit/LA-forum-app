@@ -35,7 +35,12 @@
 
 <script>
 export default {
-name: "Admin"
+  name: "Admin",
+  mounted() {
+    if (this.$store.state.user.admin === false || this.$store.state.user.number === null){
+      this.$router.push({ name: 'Register'})
+    }
+  },
 }
 </script>
 
