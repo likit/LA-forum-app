@@ -1,6 +1,11 @@
 <template>
 <section class="section">
-  <h1 class="title is-info has-text-centered">Programs</h1>
+  <div class="has-text-centered">
+    <img src="../assets/LA-logo-small.png" width="100">
+  </div>
+  <h1 class="title has-text-info has-text-centered">
+    Programs
+  </h1>
   <table class="table is-fullwidth box is-striped" v-for="pg in progs" :key="pg.title">
     <col width="50%">
     <tr>

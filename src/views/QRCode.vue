@@ -1,8 +1,11 @@
 <template>
   <section class="section">
-    <div class="container box">
+    <div class="has-text-centered">
+      <img src="../assets/LA-logo-small.png" width="100">
       <h1 class="title is-size-4 has-text-info has-text-centered">QR Code</h1>
       <h1 class="subtitle is-size-6 has-text-centered">สำหรับลงทะเบียนเข้างานและรับกระเป๋า</h1>
+    </div>
+    <div class="container has-text-centered">
       <qrcode v-bind:value="$store.state.user.lineId"
               v-if="$store.state.user.lineId !== null"
               :options="{ width: 250 }"></qrcode>

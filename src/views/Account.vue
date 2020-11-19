@@ -1,11 +1,14 @@
 <template>
   <section class="section">
-    <div class="container box">
-      <div class="has-text-centered">
-        <h1 class="title is-size-4 has-text-info">Account</h1>
-        <h1 class="subtitle is-size-6">ข้อมูลส่วนตัว</h1>
-      </div>
-      <hr>
+    <div class="has-text-centered">
+      <img src="../assets/LA-logo-small.png" width="100">
+    </div>
+    <div class="has-text-centered">
+      <h1 class="title is-size-4 has-text-info">Account</h1>
+      <h1 class="subtitle is-size-6"><strong>ข้อมูลส่วนตัว</strong></h1>
+      <br>
+    </div>
+    <div class="container">
       <table class="table is-striped is-narrow">
         <tr>
           <td class="title is-size-6">ชื่อ นามสกุล</td>
@@ -30,15 +33,24 @@
           <td>{{ user.email }}</td>
         </tr>
       </table>
+      <br>
     </div>
     <div class="columns">
       <div class="column has-text-centered">
+        <div class="buttons is-centered">
         <a class="button is-info is-rounded" @click="$router.push({name: 'Home'})">
           <span class="icon">
             <i class="fas fa-home"></i>
           </span>
           <span>Home</span>
         </a>
+        <router-link :to="{ name: 'QRCode' }">
+          <button class="button is-rounded is-link">
+            <b-icon pack="fas" icon="qrcode"></b-icon>
+            <span>Your QR</span>
+          </button>
+        </router-link>
+        </div>
       </div>
     </div>
   </section>

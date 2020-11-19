@@ -1,9 +1,13 @@
 <template>
   <section class="section">
+    <div class="has-text-centered">
+      <img src="../assets/LA-logo-small.png" width="100">
+      <h1 class="has-text-info title has-text-centered">Opening Draw</h1>
+    </div>
     <div class="container">
+      <br>
       <div class="has-text-centered">
-        <h1 class="has-text-info title">Opening Draw</h1>
-        <button class="button is-success" @click="draw">Draw!!</button>
+        <button class="button is-success is-large" @click="draw">Draw!!</button>
       </div>
       <div v-for="w in winlist" :key="w.number">
         <h1 class="title is-size-1">{{ w.number }}</h1>

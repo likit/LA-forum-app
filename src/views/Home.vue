@@ -2,9 +2,9 @@
   <section class="section">
     <div class="container">
       <div class="has-text-centered">
-        <h2 class="title is-size-4 has-text-info">Welcome</h2>
-        <h2 class="subtitle is-size-6">{{ user.title }}{{ user.firstname }} {{ user.lastname }}</h2>
-        <p>{{ user.profile.displayName }}</p>
+        <img src="../assets/LA-logo-small.png">
+        <p>{{ user.title }}{{ user.firstname }} {{ user.lastname }}</p>
+        <hr>
       </div>
       <br>
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
@@ -35,6 +35,34 @@
         </div>
       </div>
 
+      <div class="media box" @click="$router.push({ name: 'Program' })">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <h3 class="title is-size-5">Programs</h3>
+            รายการบรรยายและกิจกรรม
+          </div>
+        </div>
+      </div>
+
+      <div class="media box" @click="$router.push({ name: 'Opening' })">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="https://source.unsplash.com/collection/83970216/64x64">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <h3 class="title is-size-5">Opening Ceremony</h3>
+            พิธีเปิด
+          </div>
+        </div>
+      </div>
+
       <div class="media box" @click="$router.push({ name: 'Account' })">
         <figure class="media-left">
           <p class="image is-64x64">
@@ -49,32 +77,6 @@
         </div>
       </div>
 
-      <div class="media box" @click="$router.push({ name: 'Program' })">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://source.unsplash.com/collection/83970216/64x64">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <h3 class="title is-size-5">Programs</h3>
-              รายการบรรยายและกิจกรรม
-          </div>
-        </div>
-      </div>
-      <div class="media box" @click="$router.push({ name: 'Opening' })">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://source.unsplash.com/collection/83970216/64x64">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <h3 class="title is-size-5">Opening Ceremony</h3>
-            พิธีเปิด
-          </div>
-        </div>
-      </div>
       <div class="media box">
         <figure class="media-left">
           <p class="image is-64x64">

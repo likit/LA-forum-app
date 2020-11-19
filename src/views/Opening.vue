@@ -1,17 +1,20 @@
 <template>
   <section class="section">
+    <div class="has-text-centered">
+      <img src="../assets/LA-logo-small.png" width="100">
+    </div>
+    <h1 class="title has-text-info is-size-4 has-text-centered">Opening Ceremony</h1>
     <div class="container">
-      <h1 class="title has-text-info is-size-4 has-text-centered">Opening Ceremony</h1>
       <div class="has-text-centered">
         <h1 class="subtitle is-size-6" v-if="!opening">ร่วมกดไลค์เพื่อเปิดงาน</h1>
-        <h1 class="subtitle is-size-6" v-else>หมายเลขลงทะเบียนของท่านคือ</h1>
         <button class="button is-large is-info" v-if="!opening" @click="openingHandler">
           <span class="icon">
             <i class="far fa-thumbs-up"></i>
           </span>
           <span>Like!</span>
         </button>
-        <div v-if="opening">
+        <div v-if="opening" class="box">
+          <h1 class="subtitle is-size-6">หมายเลขลงทะเบียนของท่านคือ</h1>
           <div class="columns">
             <div class="column">
               <h1 class="title is-size-1">{{ $store.state.user.number }}</h1>
@@ -27,17 +30,20 @@
               </p>
             </div>
           </div>
-          <div class="columns">
-            <div class="column">
-              <router-link :to="{ name: 'Home' }">
-                <button class="button is-info is-rounded">
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <br>
+          <div class="buttons is-centered">
+            <router-link :to="{ name: 'Home' }">
+              <button class="button is-info is-rounded">
                   <span class="icon">
                     <i class="fas fa-home"></i>
                   </span>
-                  <span>Home</span>
-                </button>
-              </router-link>
-            </div>
+                <span>Home</span>
+              </button>
+            </router-link>
           </div>
         </div>
       </div>

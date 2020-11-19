@@ -1,9 +1,34 @@
 <template>
   <section class="section">
+    <div class="has-text-centered">
+      <img src="../assets/LA-logo-small.png" width="100">
+    </div>
+    <h1 class="title has-text-centered has-text-danger">Admin Page</h1>
     <div class="container">
-      <ul>
-        <li><a @click="$router.push({ name: 'OpeningDraw' })">Opening draw</a></li>
-      </ul>
+      <nav class="panel">
+        <p class="panel-heading">Menu</p>
+        <a class="panel-block" @click="$router.push({ name: 'OpeningDraw' })">
+          <span class="panel-icon">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+          Opening draw
+        </a>
+        <a class="panel-block" @click="$router.push({ name: 'OpeningDraw' })">
+          <span class="panel-icon">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+          Registration Scan
+        </a>
+      </nav>
+    </div>
+    <br>
+    <div class="buttons is-centered">
+      <button class="button is-info is-rounded" @click="$router.push({ name: 'Home' })">
+      <span class="icon">
+        <i class="fas fa-home"></i>
+      </span>
+        <span>Home</span>
+      </button>
     </div>
   </section>
 </template>
