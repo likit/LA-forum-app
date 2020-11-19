@@ -37,7 +37,6 @@
 <script>
 import { users } from '../firebase'
 import { mapState } from 'vuex'
-import liff from "@line/liff";
 
 export default {
   name: 'Register',
@@ -57,7 +56,6 @@ export default {
     },
     submit: function() {
       const self = this
-      console.log('registering..')
       users.where('number', '==', parseInt(this.number)).get().then((snapshot) => {
         if (snapshot.docs.length > 0) {
           let doc = snapshot.docs[0]
@@ -71,12 +69,10 @@ export default {
             self.$store.commit('set_license_id', doc.data().licenseId)
             self.$store.commit('set_admin', doc.data().admin)
               // check if Line ID not bound to this account
-            if (!doc.data().lineId || doc.data().lineId === "") {
-              liff.getProfile().then((profile)=> {
+            if (!doc.data().lineId) {
+              self.$liff.getProfile().then((profile)=> {
                 self.$store.commit('set_line_id', profile.userId)
-                localStorage.lineId = profile.userId
                 users.doc(doc.id).update({lineId: profile.userId}).then(()=>{
-                  console.log(localStorage.getItem('lineId'))
                   self.showHomeButton = true
                   self.$buefy.toast.open({ message: 'เปิดการใช้งานเรียบร้อย', type: 'is-success'})
                   self.$router.push({'name': 'Home'})

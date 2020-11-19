@@ -6,9 +6,7 @@
       <h1 class="subtitle is-size-6 has-text-centered">สำหรับลงทะเบียนเข้างานและรับกระเป๋า</h1>
     </div>
     <div class="container has-text-centered">
-      <qrcode v-bind:value="$store.state.user.lineId"
-              v-if="$store.state.user.lineId !== null"
-              :options="{ width: 250 }"></qrcode>
+      <qrcode v-bind:value="$store.state.user.lineId" :options="{ width: 250 }"></qrcode>
     </div>
     <div class="buttons is-centered">
       <router-link :to="{ name: 'Home' }">
@@ -25,10 +23,11 @@
 
 <script>
 export default {
-name: "QRCode",
+  name: "QRCode",
   mounted() {
-    if (this.$store.state.user.number === null) {
-      this.$router.push({ name: 'Register' })
+    console.log(this.$store.state.user.lineId)
+    if(!this.$store.state.user.lineId) {
+      this.$router.push({ name: 'Register'})
     }
   }
 }

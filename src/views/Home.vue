@@ -5,6 +5,7 @@
         <img src="../assets/LA-logo-small.png">
         <p>{{ user.title }}{{ user.firstname }} {{ user.lastname }}</p>
         <hr>
+        <p>Version 0.99</p>
       </div>
       <br>
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
@@ -125,6 +126,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import {users} from '@/firebase'
 
 export default {
   computed: {
@@ -136,13 +138,16 @@ export default {
       if (!self.$liff.isLoggedIn()) {
         self.$liff.login()
       }
-      if (!localStorage.getItem("lineId")) {
-        console.log(localStorage.getItem('lineId'))
-        self.$router.push({ name: "Register"})
-      } else {
-        self.$store.commit('set_line_id', localStorage.getItem('lineId'))
-        self.$store.dispatch('fetchUser')
-      }
+      self.$liff.getProfile().then((profile)=>{
+        users.where('lineId', '==', profile.userId).get().then((snapshot)=>{
+          if (snapshot.docs.length > 0) {
+            self.$store.commit('set_line_id', profile.userId)
+            self.$store.dispatch('fetchUser')
+          } else {
+            self.$router.push({ name: "Register"})
+          }
+        })
+      })
     })
   }
 }
