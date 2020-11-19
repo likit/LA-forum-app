@@ -13,13 +13,11 @@ export default new Vuex.Store({
             lineId: null,
             licenseId: null,
             number: null,
-            profile: {},
             firstname: null,
             lastname: null,
             title: null,
             email: null,
             phone: null,
-            activated: false,
         },
         opening: false,
     },
@@ -54,12 +52,6 @@ export default new Vuex.Store({
         set_number(state, number) {
             state.user.number = number
         },
-        set_user_activated(state, activated) {
-            state.user.activated = activated
-        },
-        set_user_profile(state, profile) {
-            state.user.profile = profile
-        },
     },
     actions: {
         fetchUser({ commit, state }) {
@@ -74,19 +66,12 @@ export default new Vuex.Store({
                         commit('set_title', user.data().title)
                         commit('set_email', user.data().email)
                         commit('set_phone', user.data().phone)
-                        commit('set_activated', user.data().activated)
                         commit('set_number', user.data().number)
                         commit('set_admin', user.data().admin)
                     }
                 })
             }
         },
-        fetchProfile({ commit }) {
-            liff.getProfile().then((profile)=> {
-                commit('set_user_profile', profile)
-                commit('set_line_id', profile.userId)
-            })
-        }
     }
 })
 
