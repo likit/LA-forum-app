@@ -24,6 +24,10 @@
       <td>{{ pg.speaker }}</td>
     </tr>
     <tr>
+      <td><strong>สังกัด</strong></td>
+      <td>{{ pg.affil }}</td>
+    </tr>
+    <tr>
       <td><strong>สถานที่</strong></td>
       <td>{{ pg.location }}</td>
     </tr>

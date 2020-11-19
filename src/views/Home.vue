@@ -89,7 +89,7 @@
         </div>
       </div>
 
-      <div class="media box" style="background-color: orange">
+      <div class="media box" style="background-color: orange" @click="$router.push({ name: 'Admin'})">
         <figure class="media-left">
           <p class="image is-64x64">
             <img src="https://source.unsplash.com/collection/83970216/64x64">

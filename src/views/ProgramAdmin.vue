@@ -10,18 +10,21 @@
     <b-field label="Speaker">
       <b-input v-model="program.speaker" type="is-danger"></b-input>
     </b-field>
+    <b-field label="Affiliation">
+      <b-input v-model="program.affil" type="is-danger"></b-input>
+    </b-field>
     <b-field label="Location">
       <b-input v-model="program.location" type="is-danger"></b-input>
     </b-field>
     <b-field label="Begins At">
-      <b-datetimepicker inline v-model="program.startDateTime"
+      <b-datetimepicker v-model="program.startDateTime"
           placeholder="Click to select..."
           icon="calendar-today"
           horizontal-time-picker>
       </b-datetimepicker>
     </b-field>
     <b-field label="Ends At">
-      <b-datetimepicker inline v-model="program.endDateTime"
+      <b-datetimepicker v-model="program.endDateTime"
           placeholder="Click to select..."
           icon="calendar-today"
           horizontal-time-picker>
@@ -57,6 +60,7 @@ export default {
         startDateTime: null,
         endDateTime: null,
         speaker: '',
+        affil: '',
         location: '',
         materialUrl: '',
       }

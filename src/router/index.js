@@ -50,6 +50,16 @@ const routes = [
     name: 'ProgramAdminEdit',
     component: () => import(/* webpackChunkName: "about" */ '../views/ProgramAdmin')
   },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin')
+  },
+  {
+    path: '/admin/opening-draw',
+    name: 'OpeningDraw',
+    component: () => import(/* webpackChunkName: "about" */ '../views/OpeningDraw')
+  },
 ]
 
 const router = new VueRouter({
