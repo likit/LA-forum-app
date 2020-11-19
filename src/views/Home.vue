@@ -125,6 +125,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import {users} from '@/firebase'
 
 export default {
   computed: {
@@ -133,20 +134,23 @@ export default {
   mounted() {
     const self = this
     this.$liff.init({ liffId: '1654917258-m2QqMz51'}).then(function() {
-      if (self.$liff.isLoggedIn()) {
-        self.$store.dispatch('fetchProfile')
-        self.$store.dispatch('fetchUser')
-        // self.$liff.login()
-      } else {
-        // self.$liff.login()
-        // self.$store.dispatch('fetchProfile')
+      if (!self.$liff.isLoggedIn()) {
+        self.$liff.login()
       }
+      users.where('lineId', '==', this.user.lineId).get().then((snapshot)=>{
+        if (snapshot.docs.length > 0) {
+          let doc = snapshot.docs[0]
+          if (doc.data().activated) {
+            self.$store.dispatch('fetchProfile')
+            self.$store.dispatch('fetchUser')
+          } else {
+            self.$router.push({ name: "Register"})
+          }
+        } else {
+          self.$router.push({ name: "Register"})
+        }
+      })
     })
-    if (this.user.activated === false || this.user.lineId === null) {
-      this.$router.push({ name: 'Register' })
-    }
-  },
-  methods: {
   }
 }
 </script>

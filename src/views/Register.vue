@@ -56,27 +56,35 @@ export default {
         if (snapshot.docs.length > 0) {
           let doc = snapshot.docs[0]
           if (doc.data().passcode == self.passcode) {
-            self.$store.commit('set_number', doc.data().number)
-            self.$store.commit('set_title', doc.data().title)
-            self.$store.commit('set_firstname', doc.data().firstname)
-            self.$store.commit('set_lastname', doc.data().lastname)
-            self.$store.commit('set_email', doc.data().email)
-            self.$store.commit('set_phone', doc.data().phone)
-            self.$store.commit('set_license_id', doc.data().licenseId)
-            self.$store.commit('set_admin', doc.data().admin)
-            if (self.user.lineId !== null) {
-              users.doc(doc.id).update({ lineId: self.user.lineId })
+            if (doc.data().activated !== true) {
+              self.$store.commit('set_number', doc.data().number)
+              self.$store.commit('set_title', doc.data().title)
+              self.$store.commit('set_firstname', doc.data().firstname)
+              self.$store.commit('set_lastname', doc.data().lastname)
+              self.$store.commit('set_email', doc.data().email)
+              self.$store.commit('set_phone', doc.data().phone)
+              self.$store.commit('set_license_id', doc.data().licenseId)
+              self.$store.commit('set_admin', doc.data().admin)
+              // check if Line ID not bound to this account
+              if (doc.data().lineId === null) {
+                if (!self.$liff.isLoggedIn()) {
+                  self.$liff.login()
+                }
+                self.$store.dispatch('fetchProfile')
+                users.doc(doc.id).update({lineId: self.user.lineId})
+              }
+              // activate the account
+              users.doc(doc.id).update({ activated: true }).then(()=>{
+                self.showHomeButton = true
+                self.$store.commit('set_user_activated', true)
+                self.$buefy.toast.open({ message: 'เปิดการใช้งานเรียบร้อย', type: 'is-success'})
+                self.$router.push({'name': 'Home'})
+              })
+            } else {
+              if (doc.data().lineId !== self.user.lineId) {
+                self.$buefy.toast.open({ message: 'บัญชีนี้ได้เปิดการใช้บริการบนอุปกรณ์อื่นแล้ว', type: 'is-danger'})
+              }
             }
-            // the account has been activated before
-            if (self.user.lineId === null && doc.data().lineId !== null) {
-              self.$store.commit('set_line_id', doc.data().lineId)
-            }
-            users.doc(doc.id).update({ activated: true }).then(()=>{
-              self.showHomeButton = true
-              self.$store.commit('set_user_activated', true)
-              self.$buefy.toast.open({ message: 'เปิดการใช้งานเรียบร้อย', type: 'is-success'})
-              self.$router.push({'name': 'Home'})
-            })
           } else {
             self.$buefy.toast.open({ message: 'รหัสผ่านไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง', type: 'is-danger'})
           }
