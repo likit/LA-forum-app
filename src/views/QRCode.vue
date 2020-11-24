@@ -6,7 +6,9 @@
       <h1 class="subtitle is-size-6 has-text-centered">สำหรับลงทะเบียนเข้างานและรับกระเป๋า</h1>
     </div>
     <div class="container has-text-centered">
-      <qrcode v-bind:value="$store.state.user.lineId" :options="{ width: 250 }"></qrcode>
+      <h1 class="title is-size-4">{{ $store.state.user.number }}</h1>
+      <qrcode v-bind:value="$store.state.user.lineId" :options="{ width: 250 }"
+              v-if="$store.state.user.lineId"></qrcode>
     </div>
     <div class="buttons is-centered">
       <router-link :to="{ name: 'Home' }">
@@ -22,12 +24,27 @@
 </template>
 
 <script>
+import {users} from '@/firebase'
+
 export default {
   name: "QRCode",
   mounted() {
-    console.log(this.$store.state.user.lineId)
+    const self = this
     if(!this.$store.state.user.lineId) {
-      this.$router.push({ name: 'Register'})
+      self.$buefy.toast.open({ message: 'fetching line ID', type: 'is-warning'})
+      if (!self.$liff.isLoggedIn() && self.$liff.isInClient()) {
+        self.$liff.login()
+      }
+      self.$liff.getProfile().then((profile)=>{
+        users.where('lineId', '==', profile.userId).get().then((snapshot)=>{
+          if (snapshot.docs.length > 0) {
+            self.$store.commit('set_line_id', profile.userId)
+            self.$store.dispatch('fetchUser')
+          } else {
+            self.$router.push({ name: "Register"})
+          }
+        })
+      })
     }
   }
 }

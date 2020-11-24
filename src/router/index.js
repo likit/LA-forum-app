@@ -56,6 +56,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/ProgramAdmin')
   },
   {
+    path: '/programs/<:programId>/rate',
+    name: 'RateProgram',
+    component: () => import(/* webpackChunkName: "about" */ '../views/RateProgram')
+  },
+  {
     path: '/admin',
     name: 'Admin',
     component: () => import(/* webpackChunkName: "about" */ '../views/Admin')
@@ -66,9 +71,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/OpeningDraw')
   },
   {
+    path: '/admin/scanner',
+    name: 'RegistrationScan',
+    component: () => import(/* webpackChunkName: "about" */ '../views/RegistrationScan')
+  },
+  {
     path: '/admin/gallery',
     name: 'GalleryAdmin',
     component: () => import(/* webpackChunkName: "about" */ '../views/GalleryAdmin')
+  },
+  {
+    path: '/survey',
+    name: 'Survey',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Survey')
   },
 ]
 

@@ -52,7 +52,7 @@ export default {
           self.winners.push(doc.data())
         })
         let n = 0
-        while (n == 0) {
+        while (n <= 10) {
           let idx = Math.floor(Math.random() * self.samples.length)
           let winner = self.samples[idx]
           if (self.wins.indexOf(winner) < 0) {

@@ -1,6 +1,9 @@
 <template>
 <section class="section">
   <div class="container">
+    <b-field label="Order">
+      <b-input v-model="program.order" type="is-danger"></b-input>
+    </b-field>
     <b-field label="Session Title">
       <b-input v-model="program.sessionTitle" type="is-danger"></b-input>
     </b-field>
@@ -57,6 +60,7 @@ export default {
       program: {
         sessionTitle: '',
         title: '',
+        order: '',
         startDateTime: null,
         endDateTime: null,
         speaker: '',

@@ -53,7 +53,7 @@
 
 <script>
 import {mapState} from "vuex";
-import {draws} from "../firebase"
+import {draws, users} from "../firebase"
 
 export default {
 name: "Opening",
@@ -66,8 +66,22 @@ name: "Opening",
     ...mapState(['opening'])
   },
   mounted() {
-    if (this.$store.state.user.number === null) {
-      this.$router.push({ name: 'Register' })
+    const self = this
+    if(!this.$store.state.user.lineId) {
+      self.$buefy.toast.open({ message: 'fetching line ID', type: 'is-warning'})
+      if (!self.$liff.isLoggedIn() && self.$liff.isInClient()) {
+        self.$liff.login()
+      }
+      self.$liff.getProfile().then((profile)=>{
+        users.where('lineId', '==', profile.userId).get().then((snapshot)=>{
+          if (snapshot.docs.length > 0) {
+            self.$store.commit('set_line_id', profile.userId)
+            self.$store.dispatch('fetchUser')
+          } else {
+            self.$router.push({ name: "Register"})
+          }
+        })
+      })
     }
   },
   methods: {

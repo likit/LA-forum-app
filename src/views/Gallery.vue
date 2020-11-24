@@ -13,7 +13,7 @@
           <span class="icon">
             <i class="far fa-image"></i>
           </span>
-          <span>View</span>
+          <a :href="gal.url" target="_blank">View</a>
         </button>
       </div>
       <div class="buttons is-centered" v-if="$store.state.user.admin">
@@ -22,13 +22,6 @@
             <i class="fas fa-home"></i>
           </span>
           <span>Home</span>
-        </button>
-        <button class="button is-rounded is-success"
-                @click="$router.push({ name: 'GalleryAdmin' })">
-          <span class="icon">
-            <i class="fas fa-folder-plus"></i>
-          </span>
-          <span>Album</span>
         </button>
       </div>
     </div>

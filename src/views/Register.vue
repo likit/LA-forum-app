@@ -79,6 +79,9 @@ export default {
                 })
               })
             } else {
+              self.$liff.getProfile().then((profile)=>{
+                self.$store.commit('set_line_id', profile.userId)
+              })
               self.$buefy.toast.open({ message: 'เปิดการใช้งานเรียบร้อย', type: 'is-success'})
               self.$router.push({'name': 'Home'})
             }

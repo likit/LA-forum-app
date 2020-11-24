@@ -11,6 +11,12 @@
     <div class="container">
       <table class="table is-striped is-narrow">
         <tr>
+          <td class="title is-size-6">หมายเลขลงทะเบียน</td>
+          <td>
+            {{ user.number }}
+          </td>
+        </tr>
+        <tr>
           <td class="title is-size-6">ชื่อ นามสกุล</td>
           <td>
             {{ user.title }} {{ user.firstname }} {{ user.lastname }}
@@ -34,6 +40,12 @@
         </tr>
       </table>
       <br>
+      <h1 class="title is-size-5">Registration Records</h1>
+      <table class="table is-narrow">
+        <tr v-for="ch in checkins" :key="ch.toDate().toLocaleString()">
+          <td>{{ ch.toDate().toLocaleString() }}</td>
+        </tr>
+      </table>
     </div>
     <div class="columns">
       <div class="column has-text-centered">
@@ -58,15 +70,39 @@
 
 <script>
 import {mapState} from "vuex";
+import {users, checkins} from "@/firebase";
 
 export default {
 name: "Account",
+  data() {
+    return {
+      checkins: []
+    }
+  },
   computed: {
     ...mapState(['user'])
   },
   mounted() {
-    if (this.$store.state.user.number === null) {
-      this.$router.push({ name: 'Register' })
+    const self = this
+    if(!this.$store.state.user.lineId) {
+      self.$buefy.toast.open({ message: 'fetching line ID', type: 'is-warning'})
+      if (!self.$liff.isLoggedIn() && self.$liff.isInClient()) {
+        self.$liff.login()
+      }
+      self.$liff.getProfile().then((profile)=>{
+        users.where('lineId', '==', profile.userId).get().then((snapshot)=>{
+          if (snapshot.docs.length > 0) {
+            self.$store.dispatch('fetchUser')
+            checkins.where('lineId', '==', profile.userId).get().then(snapshot=>{
+              snapshot.docs.forEach(d=>{
+                self.checkins.push(d.data())
+              })
+            })
+          } else {
+            self.$router.push({ name: "Register"})
+          }
+        })
+      })
     }
   },
 }

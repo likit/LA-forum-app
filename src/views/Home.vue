@@ -5,7 +5,7 @@
         <img src="../assets/LA-logo-small.png">
         <p>{{ user.title }}{{ user.firstname }} {{ user.lastname }}</p>
         <hr>
-        <p>Version 0.99</p>
+        <p>Version 0.99rc15</p>
       </div>
       <br>
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
@@ -50,20 +50,6 @@
         </div>
       </div>
 
-      <div class="media box" @click="$router.push({ name: 'Opening' })">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://source.unsplash.com/collection/83970216/64x64">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <h3 class="title is-size-5">Opening Ceremony</h3>
-            พิธีเปิด
-          </div>
-        </div>
-      </div>
-
       <div class="media box" @click="$router.push({ name: 'Account' })">
         <figure class="media-left">
           <p class="image is-64x64">
@@ -78,7 +64,7 @@
         </div>
       </div>
 
-      <div class="media box">
+      <div class="media box" @click="$router.push({ name: 'Survey'})">
         <figure class="media-left">
           <p class="image is-64x64">
             <img src="https://source.unsplash.com/collection/83970216/64x64">
@@ -106,7 +92,9 @@
         </div>
       </div>
 
-      <div class="media box" style="background-color: orange" @click="$router.push({ name: 'Admin'})">
+      <div class="media box" style="background-color: orange"
+           v-if="$store.state.user.admin == true"
+           @click="$router.push({ name: 'Admin'})">
         <figure class="media-left">
           <p class="image is-64x64">
             <img src="https://source.unsplash.com/collection/83970216/64x64">
@@ -135,7 +123,7 @@ export default {
   mounted() {
     const self = this
     this.$liff.init({ liffId: '1654917258-m2QqMz51'}).then(function() {
-      if (!self.$liff.isLoggedIn()) {
+      if (!self.$liff.isLoggedIn() && self.$liff.isInClient()) {
         self.$liff.login()
       }
       self.$liff.getProfile().then((profile)=>{

@@ -13,7 +13,7 @@
           </span>
           Opening draw
         </a>
-        <a class="panel-block" @click="$router.push({ name: 'OpeningDraw' })">
+        <a class="panel-block" @click="$router.push({ name: 'RegistrationScan' })">
           <span class="panel-icon">
             <i class="fas fa-chevron-right"></i>
           </span>

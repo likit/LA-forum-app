@@ -21,6 +21,10 @@ const users = db.collection('users')
 const programs = db.collection('programs')
 const draws = db.collection('draws')
 const galleries = db.collection('galleries')
+const registers = db.collection('registers')
+const programratings = db.collection('programratings')
+const checkins = db.collection('checkins')
+const surveys = db.collection('surveys')
 
 export {
     firebase as fb,
@@ -28,5 +32,9 @@ export {
     users,
     programs,
     draws,
-    galleries
+    galleries,
+    registers,
+    programratings,
+    checkins,
+    surveys
 };
