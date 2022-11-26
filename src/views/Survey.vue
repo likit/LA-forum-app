@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import {surveys, users} from '@/firebase'
+import {surveys} from '@/firebase'
 
 export default {
   name: "Survey",

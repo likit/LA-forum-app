@@ -1,7 +1,7 @@
 <template>
 <section class="section">
   <div class="has-text-centered">
-    <img src="../assets/LA-logo-small.png" width="100">
+    <img src="../assets/LA-Forum-2022-logo.png" width="100">
   </div>
   <h1 class="title has-text-info has-text-centered">
     Programs
