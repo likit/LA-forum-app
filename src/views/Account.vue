@@ -70,7 +70,7 @@
 
 <script>
 import {mapState} from "vuex";
-import {users, checkins} from "@/firebase";
+import {checkins} from "@/firebase";
 
 export default {
 name: "Account",

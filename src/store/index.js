@@ -2,11 +2,21 @@ import Vuex from 'vuex'
 // import liff from '@line/liff'
 import Vue from 'vue'
 import { users } from '../firebase'
+import VuexPersistence from "vuex-persist";
+
+const vuexLocalStorage = new VuexPersistence({
+    key: 'vuex',
+    storage: window.localStorage,
+    reducer: state => ({
+        user: state.user,
+    })
+})
 
 // liff.init({liffId: '1657676192-qpme4gOz'})
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+    plugins: [vuexLocalStorage.plugin],
     state: {
         user: {
             admin: false,

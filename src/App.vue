@@ -11,9 +11,5 @@
 </template>
 
 <script>
-export default {
-  beforeCreate() {
-    // this.$liff.init({ liffId: '1657676192-qpme4gOz'})
-  },
-}
+export default {}
 </script>

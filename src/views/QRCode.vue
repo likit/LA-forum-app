@@ -1,9 +1,9 @@
 <template>
   <section class="section">
     <div class="has-text-centered">
-      <img src="../assets/LA-logo-small.png" width="100">
+      <img src="../assets/LA-Forum-2022-logo.png" width="100">
       <h1 class="title is-size-4 has-text-info has-text-centered">QR Code</h1>
-      <h1 class="subtitle is-size-6 has-text-centered">สำหรับลงทะเบียนเข้างานและรับกระเป๋า</h1>
+      <h1 class="subtitle is-size-6 has-text-centered">หมายเลขลงทะเบียน</h1>
     </div>
     <div class="container has-text-centered">
       <h1 class="title is-size-4">{{ $store.state.user.number }}</h1>

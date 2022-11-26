@@ -8,6 +8,7 @@
         <h1 class="subtitle is-size-4 has-text-link">โปรดแจ้งหมายเลข <strong>{{ user.number }}</strong> เพื่อรับกระเป๋ากับเจ้าหน้าที่</h1>
         <p>เอกสารทั้งหมดของงานประชุมเป็นไฟล์ electronics ท่านสามารถเข้าถึงได้จาก application นี้</p>
       </div>
+      <button class="button is-danger" @click="resetLineId">Reset Line ID</button>
       <br>
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
         <figure class="media-left">
@@ -94,7 +95,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 </template>
@@ -104,15 +104,28 @@ import { mapState } from 'vuex'
 import {users} from '@/firebase'
 
 export default {
+  data () {
+    return {
+      // use this message for debugging
+      message: '',
+    }
+  },
   computed: {
     ...mapState(['user'])
   },
-  mounted() {
+  methods: {
+    resetLineId: function () {
+      this.$store.commit('set_line_id', null)
+    }
+  },
+  async mounted() {
     const self = this
-    this.$liff.init({ liffId: '1657676192-qpme4gOz'}).then(function () {
-      if (!self.$liff.isLoggedIn()) {
+    await self.$liff.init({ liffId: '1657676192-qpme4gOz'}).then(()=>{
+      if (!self.$liff.isLoggedIn() && !self.$liff.isInClient()) {
         self.$liff.login()
       }
+    })
+    if(self.user.lineId === null) {
       self.$liff.getProfile().then((profile) => {
         users.where('lineId', '==', profile.userId).get().then((snapshot) => {
           if (snapshot.docs.length > 0) {
@@ -122,8 +135,10 @@ export default {
             self.$router.push({name: "Register"})
           }
         })
+      }).catch((error) => {
+        self.message = error.toString() + ' profile loading..'
       })
-    })
-  }
+    }
+  },
 }
 </script>
