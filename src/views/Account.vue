@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="has-text-centered">
-      <img src="../assets/LA-logo-small.png" width="100">
+      <img src="../assets/LA-Forum-2022-logo.png" width="100">
     </div>
     <div class="has-text-centered">
       <h1 class="title is-size-4 has-text-info">Account</h1>
@@ -41,9 +41,9 @@
       </table>
       <br>
       <h1 class="title is-size-5">Registration Records</h1>
-      <table class="table is-narrow">
-        <tr v-for="ch in checkins" :key="ch.toDate().toLocaleString()">
-          <td>{{ ch.toDate().toLocaleString() }}</td>
+      <table class="table is-bordered">
+        <tr v-for="ch in checkins" :key="ch.id">
+          <td><span class="icon"><i class="fas has-text-success fa-check-circle"></i></span>{{ ch.checkedAt.toDate().toLocaleString('th-TH', {'timezone': 'Asia/Bangkok'}) }}</td>
         </tr>
       </table>
     </div>
@@ -84,26 +84,14 @@ name: "Account",
   },
   mounted() {
     const self = this
-    if(!this.$store.state.user.lineId) {
-      self.$buefy.toast.open({ message: 'fetching line ID', type: 'is-warning'})
-      if (!self.$liff.isLoggedIn() && self.$liff.isInClient()) {
-        self.$liff.login()
-      }
-      self.$liff.getProfile().then((profile)=>{
-        users.where('lineId', '==', profile.userId).get().then((snapshot)=>{
-          if (snapshot.docs.length > 0) {
-            self.$store.dispatch('fetchUser')
-            checkins.where('lineId', '==', profile.userId).get().then(snapshot=>{
-              snapshot.docs.forEach(d=>{
-                self.checkins.push(d.data())
-              })
-            })
-          } else {
-            self.$router.push({ name: "Register"})
-          }
-        })
-      })
+    if (!self.user.lineId) {
+      self.$router.back()
     }
+    checkins.where('number', '==', self.user.number).get().then(snapshot=>{
+      snapshot.docs.forEach(d=>{
+        self.checkins.push(d.data())
+      })
+    })
   },
 }
 </script>

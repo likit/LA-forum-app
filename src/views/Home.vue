@@ -2,10 +2,11 @@
   <section class="section">
     <div class="container">
       <div class="has-text-centered">
-        <img src="../assets/LA-logo-small.png">
-        <p>{{ user.title }}{{ user.firstname }} {{ user.lastname }}</p>
-        <hr>
-        <p>Version 0.99rc15</p>
+        <img src="../assets/LA-Forum-2022-logo.png">
+        <br>
+        <h1 class="title is-size-4">ยินดีต้อนรับ {{ user.title }}{{ user.firstname }} {{ user.lastname }}</h1>
+        <h1 class="subtitle is-size-4 has-text-link">โปรดแจ้งหมายเลข <strong>{{ user.number }}</strong> เพื่อรับกระเป๋ากับเจ้าหน้าที่</h1>
+        <p>เอกสารทั้งหมดของงานประชุมเป็นไฟล์ electronics ท่านสามารถเข้าถึงได้จาก application นี้</p>
       </div>
       <br>
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
@@ -78,20 +79,6 @@
         </div>
       </div>
 
-      <div class="media box" @click="$router.push({ name: 'Gallery' })">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://source.unsplash.com/collection/83970216/64x64">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <h3 class="title is-size-5">Photo Gallery</h3>
-            อัลบั้มภาพกิจกรรม
-          </div>
-        </div>
-      </div>
-
       <div class="media box" style="background-color: orange"
            v-if="$store.state.user.admin == true"
            @click="$router.push({ name: 'Admin'})">
@@ -122,17 +109,17 @@ export default {
   },
   mounted() {
     const self = this
-    this.$liff.init({ liffId: '1654917258-m2QqMz51'}).then(function() {
-      if (!self.$liff.isLoggedIn() && self.$liff.isInClient()) {
+    this.$liff.init({ liffId: '1657676192-qpme4gOz'}).then(function () {
+      if (!self.$liff.isLoggedIn()) {
         self.$liff.login()
       }
-      self.$liff.getProfile().then((profile)=>{
-        users.where('lineId', '==', profile.userId).get().then((snapshot)=>{
+      self.$liff.getProfile().then((profile) => {
+        users.where('lineId', '==', profile.userId).get().then((snapshot) => {
           if (snapshot.docs.length > 0) {
             self.$store.commit('set_line_id', profile.userId)
             self.$store.dispatch('fetchUser')
           } else {
-            self.$router.push({ name: "Register"})
+            self.$router.push({name: "Register"})
           }
         })
       })

@@ -5,7 +5,12 @@
       <h1 class="has-text-info title has-text-centered">Opening Draw</h1>
     </div>
     <div class="container">
-      <br>
+      <div class="field">
+        <input class="input" placeholder="Event" v-model="eventName"/>
+      </div>
+      <div class="field">
+        <input class="input" placeholder="Event" v-model="number"/>
+      </div>
       <div class="has-text-centered">
         <button class="button is-success is-large" @click="draw">Draw!!</button>
       </div>
@@ -32,15 +37,16 @@ export default {
   name: "OpeningDraw",
   data() {
     return {
-      samples: [],
+      number: 10,
+      eventName: '',
       wins: [],
       winners: [],
       winlist: []
     }
   },
   mounted() {
-    if (this.$store.state.user.admin === false || this.$store.state.user.number === null){
-      this.$router.push({ name: 'Register'})
+    if (this.$store.state.user.admin === false){
+      this.$router.back()
     }
   },
   methods: {
@@ -48,18 +54,17 @@ export default {
       const self = this
       draws.get().then((snapshot)=>{
         snapshot.docs.forEach((doc)=>{
-          self.samples.push(doc.id)
           self.winners.push(doc.data())
         })
         let n = 0
-        while (n <= 10) {
+        while (n <= self.number) {
           let idx = Math.floor(Math.random() * self.samples.length)
           let winner = self.samples[idx]
           if (self.wins.indexOf(winner) < 0) {
             n = n + 1
             self.wins.push(winner)
             self.winlist.push(self.winners[idx])
-            draws.doc(winner).update({ win: true })
+            draws.doc(winner).update({ win: true, event: self.eventName })
           }
         }
       })

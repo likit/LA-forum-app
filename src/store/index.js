@@ -1,9 +1,9 @@
 import Vuex from 'vuex'
-import liff from '@line/liff'
+// import liff from '@line/liff'
 import Vue from 'vue'
 import { users } from '../firebase'
 
-liff.init({liffId: '1654917258-m2QqMz51'})
+// liff.init({liffId: '1657676192-qpme4gOz'})
 Vue.use(Vuex)
 
 export default new Vuex.Store({

@@ -48,6 +48,12 @@ export default {
         this.$router.push({ name: "Program"})
       })
     }
+  },
+  mounted() {
+    let self = this;
+    if (!self.$store.state.user.lineId) {
+      self.$router.back()
+    }
   }
 }
 </script>
