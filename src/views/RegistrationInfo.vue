@@ -1,7 +1,7 @@
 <template>
 <section class="section">
   <div class="has-text-centered">
-    <img src="../assets/LA-logo-small.png" width="100">
+    <img src="../assets/LA-Forum-2022-logo.png" width="100">
   </div>
   <h1 class="title is-size-4 has-text-info has-text-centered">Registration</h1>
   <h1 class="subtitle is-size-6 has-text-centered"><strong>ขั้นตอนการลงทะเบียนเข้างาน</strong></h1>
@@ -30,13 +30,13 @@
         <span class="icon">
           <i class="fas fa-home"></i>
         </span>
-        <span>Home</span>
+        <span>หน้าหลัก</span>
       </button>
     </router-link>
-    <router-link :to="{ name: 'QRCode' }">
+    <router-link :to="{ name: 'Register' }">
       <button class="button is-rounded is-link">
-        <b-icon pack="fas" icon="qrcode"></b-icon>
-        <span>Your QR</span>
+        <b-icon pack="fas" icon="sign-in-alt"></b-icon>
+        <span>ลงทะเบียน</span>
       </button>
     </router-link>
   </div>

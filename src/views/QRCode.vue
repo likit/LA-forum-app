@@ -31,10 +31,7 @@ export default {
   mounted() {
     const self = this
     if(!this.$store.state.user.lineId) {
-      self.$buefy.toast.open({ message: 'fetching line ID', type: 'is-warning'})
-      if (!self.$liff.isLoggedIn() && self.$liff.isInClient()) {
-        self.$liff.login()
-      }
+      self.$buefy.toast.open({ message: 'Fetching Line ID', type: 'is-warning'})
       self.$liff.getProfile().then((profile)=>{
         users.where('lineId', '==', profile.userId).get().then((snapshot)=>{
           if (snapshot.docs.length > 0) {

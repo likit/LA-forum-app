@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-// import liff from '@line/liff'
+import liff from '@line/liff'
 import Vue from 'vue'
 import { users } from '../firebase'
 import VuexPersistence from "vuex-persist";
@@ -12,7 +12,7 @@ const vuexLocalStorage = new VuexPersistence({
     })
 })
 
-// liff.init({liffId: '1657676192-qpme4gOz'})
+liff.init({liffId: '1657676192-qpme4gOz'})
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -82,6 +82,17 @@ export default new Vuex.Store({
                 })
             }
         },
+        resetUser({ commit }) {
+            commit('set_license_id', null)
+            commit('set_line_id', null)
+            commit('set_firstname', null)
+            commit('set_lastname', null)
+            commit('set_title', null)
+            commit('set_email', null)
+            commit('set_phone', null)
+            commit('set_number', null)
+            commit('set_admin', null)
+        }
     }
 })
 

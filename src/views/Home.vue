@@ -8,7 +8,9 @@
         <h1 class="subtitle is-size-4 has-text-link">โปรดแจ้งหมายเลข <strong>{{ user.number }}</strong> เพื่อรับกระเป๋ากับเจ้าหน้าที่</h1>
         <p>เอกสารทั้งหมดของงานประชุมเป็นไฟล์ electronics ท่านสามารถเข้าถึงได้จาก application นี้</p>
       </div>
+      <!--
       <button class="button is-danger" @click="resetLineId">Reset Line ID</button>
+      -->
       <br>
       <div class="media box" @click="$router.push({ name: 'RegistrationInfo'})">
         <figure class="media-left">
@@ -115,16 +117,11 @@ export default {
   },
   methods: {
     resetLineId: function () {
-      this.$store.commit('set_line_id', null)
+      this.$store.dispatch('resetUser')
     }
   },
   async mounted() {
     const self = this
-    await self.$liff.init({ liffId: '1657676192-qpme4gOz'}).then(()=>{
-      if (!self.$liff.isLoggedIn() && !self.$liff.isInClient()) {
-        self.$liff.login()
-      }
-    })
     if(self.user.lineId === null) {
       self.$liff.getProfile().then((profile) => {
         users.where('lineId', '==', profile.userId).get().then((snapshot) => {

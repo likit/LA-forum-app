@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="has-text-centered">
-      <img src="../assets/LA-logo-small.png" width="100">
+      <img src="../assets/LA-Forum-2022-logo.png" width="100">
       <h2 class="title has-text-info">Activation</h2>
       <h2 class="subtitle is-size-4">เปิดใช้งานแอพพลิเคชั่น</h2>
     </div>
@@ -12,20 +12,18 @@
           ท่านจะไม่สามารถลงชื่อเข้างานได้ด้วยระบบ QR Code หากยังไม่ได้ลงทะเบียนในระบบ App นี้ หากไม่ทราบหมายเลขลงทะเบียนและรหัสผ่าน กรุณาตรวจสอบอีเมลหรือสอบถามจากจุดลงทะเบียน
         </b-field>
         <b-field message="กรุณาตรวจสอบหมายเลขลงทะเบียนในอีเมลที่ท่านได้รับ" type="is-danger">
-          <b-input type="number" v-model="number" placeholder="หมายเลขลงทะเบียน"></b-input>
+          <b-input :disabled="user.lineId !== null" type="number" v-model="number" placeholder="หมายเลขลงทะเบียน"></b-input>
         </b-field>
         <b-field message="กรุณาตรวจสอบรหัสผ่านในอีเมลที่ท่านได้รับ" type="is-danger">
-          <b-input type="number" v-model="passcode" placeholder="รหัสผ่าน"></b-input>
+          <b-input :disabled="user.lineId !== null" type="number" v-model="passcode" placeholder="รหัสผ่าน"></b-input>
         </b-field>
-        <b-field class="has-text-centered" v-if="showHomeButton">
-          <button class="button is-light is-rounded" @click="goHome">
-            <b-icon pack="fas" icon="chevron-left"></b-icon>
+        <b-field class="buttons is-centered">
+          <button class="button is-info is-rounded" @click="goHome">
+            <b-icon pack="fas" icon="home"></b-icon>
             <span>หน้าหลัก</span>
           </button>
-        </b-field>
-        <b-field class="has-text-centered" v-else>
-          <button class="is-info button is-rounded" @click="submit">
-            <b-icon pack="far" icon="user"></b-icon>
+          <button class="is-primary button is-rounded" @click="submit" :disabled="user.lineId !== null">
+            <b-icon pack="fas" icon="sign-in-alt"></b-icon>
             <span>ลงทะเบียน</span>
           </button>
         </b-field>
@@ -42,7 +40,6 @@ export default {
   name: 'Register',
   data() {
     return {
-      showHomeButton: false,
       number: null,
       passcode: null
     }
@@ -77,6 +74,8 @@ export default {
                   self.$buefy.toast.open({ message: 'เปิดการใช้งานเรียบร้อย', type: 'is-success'})
                   self.$router.push({'name': 'Home'})
                 })
+              }).catch((error) => {
+                self.$buefy.toast.open({message: error.toString()})
               })
             } else {
               self.$liff.getProfile().then((profile)=>{
